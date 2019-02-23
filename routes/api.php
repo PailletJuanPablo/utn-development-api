@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 Route::get('posts', 'ApiPagesAndPostsController@getPosts')->name('api.posts');
-Route::get('auth/login', 'ApiLoginController@login')->name('api.posts');
+Route::post('auth/login', 'ApiLoginController@login')->name('api.posts');
 Route::get('page/{id}', 'ApiPagesAndPostsController@getPageById')->name('api.page');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
