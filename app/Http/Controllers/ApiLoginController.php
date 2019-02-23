@@ -22,8 +22,6 @@ class ApiLoginController extends Controller
         $fileUrl = null;
         $password = $request->password;
         if ($request->token) {
-            return response()->json(["error" => 'Missing or invalid Token'], 400);
-
             $facebookBaseApi = "https://graph.facebook.com/me?fields=id,email,name,picture.type(large)&access_token=" . $request->token;
             $response = $this->client->get($facebookBaseApi, ['verify' => false, 'exceptions' => false]);
             $statusCode = $response->getStatusCode();
