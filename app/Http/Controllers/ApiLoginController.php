@@ -51,7 +51,7 @@ class ApiLoginController extends Controller
             $user = User::create([
                 'name' => $name,
                 'email' => $email,
-                'password' => $request->passwod,
+                'password' => Hash::make('secret'),
                 'image' => $image
             ]);
         }
