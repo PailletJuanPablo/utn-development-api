@@ -33,9 +33,9 @@ class ApiLoginController extends Controller
 
             if ($content['picture']['data']['url']) {
                 $image = file_get_contents($content['picture']['data']['url']);
-                $fileToSave = $image->store('users');
+                $fileToSave = \File::put(public_path() . '/users/' . $user->id . '.png', $image);
                 $fileUrl = Storage::url($fileToSave);
-              //  \File::put(storage_path() . '/users/' . $user->id . '.png', $image);
+              //  
             }
             if($content['email']){
                 $email = $content['email'];
@@ -67,6 +67,7 @@ class ApiLoginController extends Controller
 
         return response()->json(
             [
+                "user"=> $user,
                 "accessToken" => $accessToken,
             ]
         );
