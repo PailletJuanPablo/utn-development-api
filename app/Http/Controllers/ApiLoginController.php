@@ -15,7 +15,7 @@ class ApiLoginController extends Controller
         $this->client = new Client();
     }
 
-    public function tryLogin(Request $request)
+    public function login(Request $request)
     {
         $email = $request->email;
         $name = $request->name;
