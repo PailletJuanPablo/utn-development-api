@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use \Firebase\JWT\JWT;
 
-class FacebookLoginController extends Controller
+class ApiLoginController extends Controller
 {
     public function __construct()
     {
