@@ -32,9 +32,8 @@ class ApiLoginController extends Controller
             };
 
             if ($content['picture']['data']['url']) {
-                $image = file_get_contents($content['picture']['data']['url']);
-                $fileToSave = \File::put(storage_path() . '/users/' . date('hhmmss') . '.png', $image);
-                $fileUrl = Storage::url(storage_path() . '/users/' . date('hhmmss') . '.png');
+                $image = $content['picture']['data']['url'];
+               
               //  
             }
             if($content['email']){
@@ -53,9 +52,11 @@ class ApiLoginController extends Controller
                 'name' => $name,
                 'email' => $email,
                 'password' => $request->passwod,
-                'image' => $fileUrl
+                'image' => $image
             ]);
         }
+
+        $user->image = $image;
 
         $dataToEncode = array(
             "id" => $user->id,
