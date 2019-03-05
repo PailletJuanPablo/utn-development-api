@@ -21,4 +21,9 @@ class ApiPagesAndPostsController extends Controller
         $pages = Page::with('childrens')->get();
         return response()->json($pages);
     }
+
+    public function getIngresantesZone(){
+        $postsFromIngresantesZone = Post::where('category_id', 2)->get();
+        return response()->json($postsFromIngresantesZone);
+    }
 }
