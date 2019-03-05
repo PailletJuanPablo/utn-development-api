@@ -16,4 +16,9 @@ class ApiPagesAndPostsController extends Controller
         $page = Page::find($id);
         return response()->json($page);
     }
+
+    public function getPages(){
+        $pages = Page::with('childrens')->get();
+        return response()->json($pages);
+    }
 }
