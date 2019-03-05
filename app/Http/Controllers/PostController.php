@@ -47,7 +47,6 @@ class PostController extends Controller
         $post->image = $fileUrl;
         $post->save();
         return redirect()->route('posts.index');
-
     }
 
     /**

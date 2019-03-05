@@ -79,7 +79,7 @@
 
                                 @foreach ($schools as $school)
                                 @if (isset($post) && $post->school)
-                                <option selected value="{{ $post->school }}"> {{ $post->school->name }} </option>
+                                <option selected value="{{ $post->school->id }}"> {{ $post->school->name }} </option>
                                 @endif
                                 <option value="{{ $school->id }}"> {{ $school->name }} </option>
                                 @endforeach
