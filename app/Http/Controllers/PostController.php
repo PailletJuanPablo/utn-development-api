@@ -41,6 +41,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        return public_path();
         $fileToSave = $request->file('image')->store('posts');
         $fileUrl = Storage::url($fileToSave);
         $post = new Post($request->all());
