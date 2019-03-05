@@ -41,12 +41,6 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->category_id == 0){
-            $request->category_id = null;
-        }
-        if($request->school_id == 0){
-            $request->school_id = null;
-        }
         $fileToSave = $request->file('image')->store('posts');
         $fileUrl = Storage::url($fileToSave);
         $post = new Post($request->all());

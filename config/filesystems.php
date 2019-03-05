@@ -51,7 +51,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => public_path() . '/files',
-            'url' => env('APP_URL').'/public/files',
+            'url' => env('APP_URL').'/public_html/files',
             'visibility' => 'public',
         ],
 
