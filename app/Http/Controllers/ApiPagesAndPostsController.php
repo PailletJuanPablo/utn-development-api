@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Page;
+use App\School;
 class ApiPagesAndPostsController extends Controller
 {
     public function getPosts(){
@@ -30,5 +31,10 @@ class ApiPagesAndPostsController extends Controller
     public function getFeatured(){
         $featuredPosts = Post::where('featured', true)->orderBy('created_at', 'DESC')->get();
         return response()->json($featuredPosts);
+    }
+
+    public function getSchools(){
+        $schools = School::all();
+        return response()->json($schools);
     }
 }

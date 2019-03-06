@@ -19,6 +19,7 @@ Route::get('pages', 'ApiPagesAndPostsController@getPages')->name('api.pages');
 Route::get('ingresantes', 'ApiPagesAndPostsController@getIngresantesZone')->name('api.ingresantes');
 Route::get('featured', 'ApiPagesAndPostsController@getFeatured')->name('api.featured');
 Route::post('auth/me', 'ApiLoginController@login')->name('api.login');
+Route::get('schools', 'ApiPagesAndPostsController@getSchools')->name('api.schools');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
