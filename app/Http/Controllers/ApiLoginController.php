@@ -17,10 +17,7 @@ class ApiLoginController extends Controller
 
     public function login(Request $request)
     {
-        $email = $request->email;
-        $name = $request->name;
         $fileUrl = null;
-        $password = $request->password;
         if ($request->token) {
             $facebookBaseApi = "https://graph.facebook.com/me?fields=id,email,name,picture.type(large)&access_token=" . $request->token;
             $response = $this->client->get($facebookBaseApi, ['verify' => false, 'exceptions' => false]);
