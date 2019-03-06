@@ -18,7 +18,6 @@ class ApiLoginController extends Controller
     public function login(Request $request)
     {
         $fileUrl = null;
-        if ($request->token) {
             $facebookBaseApi = "https://graph.facebook.com/me?fields=id,email,name,picture.type(large)&access_token=" . $request->token;
             $response = $this->client->get($facebookBaseApi, ['verify' => false, 'exceptions' => false]);
             $statusCode = $response->getStatusCode();
@@ -40,7 +39,7 @@ class ApiLoginController extends Controller
             if($content['name']){
                 $name = $content['name'];
             }
-        }  
+        
 
         $user = User::where('email', $email)->first();
 
@@ -54,6 +53,7 @@ class ApiLoginController extends Controller
         }
 
         $user->image = $image;
+        $user->save();
 
         $dataToEncode = array(
             "id" => $user->id,
@@ -61,12 +61,10 @@ class ApiLoginController extends Controller
         
         $fcmEncoderKey = env('JWT_SECRET_KEY', 'secret');
         $accessToken = JWT::encode($dataToEncode, $fcmEncoderKey);
-        $user->save();
 
         return response()->json(
             [
                 "user"=> $user,
-                "accessToken" => $accessToken,
             ]
         );
     }
