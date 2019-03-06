@@ -40,7 +40,6 @@ class ApiLoginController extends Controller
 
         $user = User::where('email', $email)->first();
 
-        return $user;
         if (!$user) {
             $user = User::create([
                 'name' => $name,
