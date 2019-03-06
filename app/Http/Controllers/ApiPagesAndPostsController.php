@@ -26,4 +26,9 @@ class ApiPagesAndPostsController extends Controller
         $postsFromIngresantesZone = Post::where('category_id', 2)->orderBy('created_at', 'DESC')->get();
         return response()->json($postsFromIngresantesZone);
     }
+
+    public function getFeatured(){
+        $featuredPosts = Post::where('featured', true)->orderBy('created_at', 'DESC')->get();
+        return response()->json($featuredPosts);
+    }
 }

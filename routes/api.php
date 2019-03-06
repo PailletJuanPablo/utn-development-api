@@ -13,10 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 Route::get('posts', 'ApiPagesAndPostsController@getPosts')->name('api.posts');
-Route::post('auth/login', 'ApiLoginController@login')->name('api.posts');
+Route::post('auth/login', 'ApiLoginController@login')->name('api.login');
 Route::get('page/{id}', 'ApiPagesAndPostsController@getPageById')->name('api.page');
-Route::get('pages', 'ApiPagesAndPostsController@getPages')->name('api.page');
-Route::get('ingresantes', 'ApiPagesAndPostsController@getIngresantesZone')->name('api.posts');
+Route::get('pages', 'ApiPagesAndPostsController@getPages')->name('api.pages');
+Route::get('ingresantes', 'ApiPagesAndPostsController@getIngresantesZone')->name('api.ingresantes');
+Route::get('featured', 'ApiPagesAndPostsController@getFeatured')->name('api.featured');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
