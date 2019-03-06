@@ -55,12 +55,10 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="image">Pertenece a alguna categoría?</label>
-                        <label> Seleccione si fuese necesario </label>
+                        <label for="image">Categoría de la novedad</label>
                         <br>
                         <select name="category_id">
-                                <option value="0"> Ninguna</option>
-
+                                <option value="1"> General</option>
                             @foreach ($categories as $category)
                             @if (isset($post) && $post->category)
                             <option selected value="{{ $post->category->id }}"> {{ $post->category->name }} </option>
