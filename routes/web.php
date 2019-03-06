@@ -23,3 +23,6 @@ Route::resource('pages', 'PagesController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('terms', function(){
+    return view('terms');
+});
