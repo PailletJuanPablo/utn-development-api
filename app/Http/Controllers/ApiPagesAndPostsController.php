@@ -8,7 +8,7 @@ use App\Page;
 class ApiPagesAndPostsController extends Controller
 {
     public function getPosts(){
-        $posts = Post::with('category', 'school')->get();
+        $posts = Post::with('category', 'school')->orderBy('created_at', 'DESC')->get();
         return response()->json($posts);
     }
 
@@ -23,7 +23,7 @@ class ApiPagesAndPostsController extends Controller
     }
 
     public function getIngresantesZone(){
-        $postsFromIngresantesZone = Post::where('category_id', 2)->get();
+        $postsFromIngresantesZone = Post::where('category_id', 2)->orderBy('created_at', 'DESC')->get();
         return response()->json($postsFromIngresantesZone);
     }
 }
