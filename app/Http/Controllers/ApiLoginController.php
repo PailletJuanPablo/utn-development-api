@@ -62,6 +62,7 @@ class ApiLoginController extends Controller
         return response()->json(
             [
                 "user" => $user,
+                "school" => $user->school
             ]
         );
     }
