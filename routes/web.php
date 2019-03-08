@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
 
 Route::resource('schools', 'SchoolController');
 Route::resource('categories', 'CategoryController');
