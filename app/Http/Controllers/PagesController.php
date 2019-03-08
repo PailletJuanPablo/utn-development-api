@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Storage;
 
 class PagesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -46,7 +51,7 @@ class PagesController extends Controller
         } else {
             $post->image = 'https://scontent.fcor5-1.fna.fbcdn.net/v/t1.0-9/38665108_977854199060595_6359927627058249728_n.png?_nc_cat=109&_nc_ht=scontent.fcor5-1.fna&oh=b2b95b765d641344606d1c7e7f429412&oe=5D0FEDF7';
         }
-      
+
         $post->save();
         return redirect()->route('pages.index');
     }

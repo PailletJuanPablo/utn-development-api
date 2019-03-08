@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Storage;
 
 class SchoolController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -67,7 +71,7 @@ class SchoolController extends Controller
      */
     public function edit($id)
     {
-     
+
         $school = School::find($id);
         return view('schools.form', ['school' => $school]);
     }
@@ -86,7 +90,7 @@ class SchoolController extends Controller
         $school = School::find($id);
         $school->image = $fileUrl;
         $school->save();
-     
+
         return redirect()->route('schools.index');
     }
 

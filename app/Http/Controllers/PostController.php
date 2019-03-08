@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -72,7 +77,7 @@ class PostController extends Controller
         $schools = School::all();
         $categories = Category::all();
         return view('posts.form', ['schools'=>$schools, 'categories'=>$categories, "post"=>$post]);
-       
+
     }
 
     /**
