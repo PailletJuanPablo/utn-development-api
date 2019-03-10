@@ -1,4 +1,4 @@
-@extends('layouts.app') 
+@extends('layouts.app')
 @section('content')
 <div class="row">
     <div class="col-md-12 col-md-offset-1">
@@ -49,7 +49,7 @@
                                 @if (isset($post))
 
                                 {{ $post->content }}
-                                    
+
                                 @endif
                                 </textarea>
                     </div>
@@ -57,32 +57,52 @@
                     <div class="form-group">
                         <label for="image">Categoría de la novedad</label>
                         <br>
+
                         <select name="category_id">
-                                <option value="1"> General</option>
+
                             @foreach ($categories as $category)
-                            @if (isset($post) && $post->category)
-                            <option selected value="{{ $post->category->id }}"> {{ $post->category->name }} </option>
+                            <option
+                            @if(isset($post) && $post->category_id && $post->category_id == $category->id)
+                            selected
                             @endif
-                            <option value="{{ $category->id }}"> {{ $category->name }} </option>
+                            value="{{ $category->id }}">
+                                {{ $category->name }}
+                            </option>
                             @endforeach
+
                         </select>
                     </div>
 
                     <div class="form-group">
-                            <label for="image">Pertenece a alguna escuela?</label>
-                            <label> Seleccione si fuese necesario </label>
-                            <br>
-                            <select name="school_id">
-                                    <option value="0"> Ninguna</option>
+                        <label for="image">Pertenece a alguna escuela?</label>
+                        <label> Seleccione si fuese necesario </label>
+                        <br>
 
-                                @foreach ($schools as $school)
-                                @if (isset($post) && $post->school)
-                                <option selected value="{{ $post->school->id }}"> {{ $post->school->name }} </option>
+                        <select multiple="multiple" name="schools[]" id="schools">
+
+                            @foreach ($schools as $school)
+                            <option
+
+                            @isset($post)
+                            @foreach ($post->schools as $postSchool)
+                                @if ($postSchool->school_id == $school->id)
+                                    selected
                                 @endif
-                                <option value="{{ $school->id }}"> {{ $school->name }} </option>
-                                @endforeach
+                            @endforeach
+                            @endisset
+
+                            value="{{ $school->id }}">
+                            {{ $school->name }}
+
+                            </option>
+
+
+                            @endforeach
+
                             </select>
-                        </div>
+
+
+                    </div>
 
                     <button type="submit" class="btn btn-primary"> {{ isset($post) ? 'Actualizar' : 'Crear' }} </button>
                 </form>

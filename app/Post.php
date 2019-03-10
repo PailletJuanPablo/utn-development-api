@@ -5,17 +5,19 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
-    
-    protected $guarded = [];
+
+    protected $fillable = [
+        'title' , 'image' , 'content' , 'category_id' , 'school_id' , 'modified_by' , 'featured'];
+
 
     public function category()
     {
         return $this->belongsTo('App\Category');
     }
 
-    public function school()
+    public function schools()
     {
-        return $this->belongsTo('App\School');
+        return $this->hasMany('App\SchoolPost');
     }
 
     public function lastUpdate(){
@@ -23,5 +25,5 @@ class Post extends Model
     }
 
 
-    
+
 }

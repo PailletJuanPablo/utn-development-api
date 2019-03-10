@@ -7,7 +7,7 @@ use App\Post;
 use App\Category;
 use App\School;
 use Illuminate\Support\Facades\Storage;
-
+use App\SchoolPost;
 class PostController extends Controller
 {
     public function __construct()
@@ -46,11 +46,27 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $fileToSave = $request->file('image')->store('posts');
-        $fileUrl = Storage::url($fileToSave);
-        $post = new Post($request->all());
-        $post->image = $fileUrl;
+        $post = new Post;
+
+        $post->fill($request->all());
+
+        if($request->file('image')){
+            $fileToSave = $request->file('image')->store('posts');
+            $fileUrl = Storage::url($fileToSave);
+            $post->image = $fileUrl;
+        }else {
+            $post->image = 'https://instagram.fcor5-1.fna.fbcdn.net/vp/e6ce9b51cbe566e8dc27b887b081b69c/5D17FEDA/t51.2885-19/s150x150/18513617_536293016565183_3665677930559700992_a.jpg?_nc_ht=instagram.fcor5-1.fna.fbcdn.net';
+        }
+
         $post->save();
+        if($request->schools){
+            foreach ($request->schools as $school) {
+                $schoolPost = new SchoolPost;
+                $schoolPost->school_id = $school;
+                $schoolPost->post_id = $post->id;
+                $schoolPost->save();
+            }
+        }
         return redirect()->route('posts.index');
     }
 
@@ -73,7 +89,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::find($id);
+        $post = Post::with('category','schools')->find($id);
         $schools = School::all();
         $categories = Category::all();
         return view('posts.form', ['schools'=>$schools, 'categories'=>$categories, "post"=>$post]);
@@ -91,6 +107,17 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         $post->update($request->all());
+
+        if($request->schools){
+            SchoolPost::where('post_id', $post->id)->delete();
+            foreach ($request->schools as $school) {
+                $schoolPost = new SchoolPost;
+                $schoolPost->school_id = $school;
+                $schoolPost->post_id = $post->id;
+                $schoolPost->save();
+            }
+        }
+
 
         if($request->file('image')){
             $fileToSave = $request->file('image')->store('posts');

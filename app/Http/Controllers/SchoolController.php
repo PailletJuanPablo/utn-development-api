@@ -42,10 +42,15 @@ class SchoolController extends Controller
      */
     public function store(Request $request)
     {
-        $fileToSave = $request->file('image')->store('schools');
-        $fileUrl = Storage::url($fileToSave);
         $school = new School($request->all());
-        $school->image = $fileUrl;
+        if($request->file('image')){
+            $fileToSave = $request->file('image')->store('schools');
+            $fileUrl = Storage::url($fileToSave);
+            $school->image = $fileUrl;
+        } else {
+            $school->image = 'https://instagram.fcor5-1.fna.fbcdn.net/vp/e6ce9b51cbe566e8dc27b887b081b69c/5D17FEDA/t51.2885-19/s150x150/18513617_536293016565183_3665677930559700992_a.jpg?_nc_ht=instagram.fcor5-1.fna.fbcdn.net';
+        }
+
         $school->save();
         $schools = School::all();
         return view('schools.index', ["schools" => $schools]);
@@ -85,10 +90,16 @@ class SchoolController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $fileToSave = $request->file('image')->store('schools');
-        $fileUrl = Storage::url($fileToSave);
         $school = School::find($id);
-        $school->image = $fileUrl;
+
+        if($request->file('image')){
+            $fileToSave = $request->file('image')->store('schools');
+            $fileUrl = Storage::url($fileToSave);
+            $school->image = $fileUrl;
+        }
+
+        $school->update($request->all());
+
         $school->save();
 
         return redirect()->route('schools.index');
