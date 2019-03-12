@@ -9,6 +9,7 @@
                    Escuelas</a>
         <a href="{{ route('categories.index') }}" class="list-group-item list-group-item-action bg-light">
                         Categorías</a>
-      
+                        <a href="{{ route('created_files') }}" class="list-group-item list-group-item-action bg-light">
+                                Archivos</a>
     </div>
 </div>

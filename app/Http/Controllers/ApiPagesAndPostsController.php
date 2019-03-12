@@ -37,4 +37,6 @@ class ApiPagesAndPostsController extends Controller
         $schools = School::all();
         return response()->json($schools);
     }
+
+
 }

@@ -24,3 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('terms', function(){
     return view('terms');
 });
+
+Route::post('created_files', 'PostController@saveFile')->name('created_files');
+Route::get('created_files', 'PostController@listFiles')->name('created_files');
+

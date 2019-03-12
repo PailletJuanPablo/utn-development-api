@@ -36,7 +36,7 @@
                     <input type="hidden" name="id" value="{{ $post->id }}"> @endif
 
                     <div class="form-group">
-                        <label for="image">Titulo del post</label>
+                        <label for="image">Imagen del post</label>
                         <br>
                         <input type="file" id="image" name="image" placeholder="Cargar imagen">
                     </div>

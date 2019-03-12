@@ -8,11 +8,13 @@ use App\Category;
 use App\School;
 use Illuminate\Support\Facades\Storage;
 use App\SchoolPost;
+use Illuminate\Support\Facades\Input;
+use App\File;
 class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('saveFile');
     }
 
     /**
@@ -141,4 +143,22 @@ class PostController extends Controller
         $post->delete();
         return redirect()->route('posts.index');
     }
+
+    public function saveFile(Request $request){
+            $fileToCreate = new File;
+            $name = $request->file('image')->getClientOriginalName();
+            $fileToCreate->file_name = $name;
+            $fileToSave = $request->file('image')->store('uploads');
+            $fileUrl = Storage::url($fileToSave);
+            $fileToCreate->file_url = $fileUrl;
+            $fileToCreate->save();
+            return redirect()->route('created_files');
+
+    }
+
+    public function listFiles(){
+        $files = File::all();
+        return view('files.index', ["files" => $files]);
+    }
+
 }
