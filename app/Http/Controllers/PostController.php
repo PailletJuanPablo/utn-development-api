@@ -161,4 +161,10 @@ class PostController extends Controller
         return view('files.index', ["files" => $files]);
     }
 
+    public function deleteFile($fileId){
+        $file = File::find($fileId);
+        $file->delete();
+        return redirect()->back();
+    }
+
 }

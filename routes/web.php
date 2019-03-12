@@ -27,4 +27,4 @@ Route::get('terms', function(){
 
 Route::post('created_files', 'PostController@saveFile')->name('created_files');
 Route::get('created_files', 'PostController@listFiles')->name('created_files');
-
+Route::post('created_files/delete/{fileId}', 'PostController@deleteFile')->name('created_files.delete');

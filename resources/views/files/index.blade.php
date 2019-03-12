@@ -21,6 +21,8 @@
                         <tr>
                             <th scope="col">Nombre Archivo</th>
                             <th scope="col">Url</th>
+                            <th scope="col">Borrar</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -28,6 +30,13 @@
                         <tr>
                             <td>{{ $file->file_name }}</td>
                             <td>{{ $file->file_url }}</td>
+                            <td>
+                                    <form method="POST" action=" {{ route('created_files.delete' , ['id' => $file->id]) }}">
+                                            @csrf
+                                            <button class="btn btn-danger" href=""> Eliminar </button>
+                                        </form>
+
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
