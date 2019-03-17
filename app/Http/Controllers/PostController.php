@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Storage;
 use App\SchoolPost;
 use Illuminate\Support\Facades\Input;
 use App\File;
+use App\Helpers\OneSignalHelper;
+use App\Notification;
+
 class PostController extends Controller
 {
     public function __construct()
@@ -67,7 +70,24 @@ class PostController extends Controller
                 $schoolPost->school_id = $school;
                 $schoolPost->post_id = $post->id;
                 $schoolPost->save();
+                $notificationToCreate = [
+                    "title" => $post->title,
+                    "content" =>$post->content,
+                    "school_id" => $school,
+                    "category_id" => $post->category_id
+                ];
+                $notificator = new OneSignalHelper;
+                 $notificator->sendCustom($notificationToCreate);
             }
+        }else{
+            $notificationToCreate = [
+                "title" => $post->title,
+                "content" =>$post->content,
+                "category_id" => $post->category_id
+            ];
+            $notificator = new OneSignalHelper;
+
+             $notificator->sendCustom($notificationToCreate);
         }
         return redirect()->route('posts.index');
     }
@@ -119,15 +139,13 @@ class PostController extends Controller
                 $schoolPost->save();
             }
         }
-
-
         if($request->file('image')){
             $fileToSave = $request->file('image')->store('posts');
             $fileUrl = Storage::url($fileToSave);
             $post->image = $fileUrl;
-
         }
         $post->save();
+
         return redirect()->route('posts.index');
     }
 
