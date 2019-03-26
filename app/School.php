@@ -11,7 +11,7 @@ class School extends Model
 
     public function posts()
     {
-        return $this->belongsToMany('App\Post')->using('App\SchoolPost');
+        return $this->hasMany('App\Post');
     }
 
 }
