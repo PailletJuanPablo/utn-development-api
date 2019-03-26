@@ -8,4 +8,10 @@ class School extends Model
 {
     protected $guarded = [];
     public $timestamps = false;
+
+    public function posts()
+    {
+        return $this->belongsToMany('App\Post');
+    }
+
 }
