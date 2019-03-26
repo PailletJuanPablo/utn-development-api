@@ -3,8 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class SchoolPost extends Model
+class SchoolPost extends Pivot
 {
     protected $table = 'post_school';
 
