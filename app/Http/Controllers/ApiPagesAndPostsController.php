@@ -9,7 +9,7 @@ use App\School;
 class ApiPagesAndPostsController extends Controller
 {
     public function getPosts(){
-        $posts = Post::with('category', 'schools', 'schools.school')->orderBy('created_at', 'DESC')->get();
+        $posts = Post::with('category', 'schools', 'schools.school')->select('id', 'title', 'image')->orderBy('created_at', 'DESC')->get();
         return response()->json($posts);
     }
 
