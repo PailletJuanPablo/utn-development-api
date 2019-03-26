@@ -11,6 +11,7 @@
         "php": "^7.1.3",
         "barryvdh/laravel-cors": "^0.11.2",
         "berkayk/onesignal-laravel": "^1.0",
+        "crocodicstudio/crudbooster": "^5.4",
         "fideloper/proxy": "^4.0",
         "firebase/php-jwt": "^5.0",
         "guzzlehttp/guzzle": "~6.0",
