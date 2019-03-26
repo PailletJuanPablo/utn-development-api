@@ -17,7 +17,7 @@ class Post extends Model
 
     public function schools()
     {
-        return $this->belongsToMany('App\School');
+        return $this->belongsToMany('App\School', 'schools_posts');
     }
 
     public function lastUpdate(){
