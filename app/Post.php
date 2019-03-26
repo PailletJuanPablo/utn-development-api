@@ -7,7 +7,7 @@ class Post extends Model
 {
 
     protected $fillable = [
-        'title' , 'image' , 'content' , 'category_id' , 'school_id' , 'modified_by' , 'featured'];
+        'title' , 'image' , 'content' , 'category_id' , 'modified_by' , 'featured'];
 
 
     public function category()
@@ -17,7 +17,7 @@ class Post extends Model
 
     public function schools()
     {
-        return $this->belongsToMany('App\School')->using('App\SchoolPost');;
+        return $this->belongsToMany('App\School');
     }
 
     public function lastUpdate(){
