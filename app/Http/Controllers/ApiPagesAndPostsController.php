@@ -13,6 +13,12 @@ class ApiPagesAndPostsController extends Controller
         return response()->json($posts);
     }
 
+    public function getPostById($id){
+        $post = Post::with('category', 'schools')->find($id);
+        return response()->json($post);
+    }
+    
+
     public function getPageById($id){
         $page = Page::find($id);
         return response()->json($page);
