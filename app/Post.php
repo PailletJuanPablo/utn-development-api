@@ -3,9 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 class Post extends Model
 {
 
+    use SoftDeletes;
+
+    
     protected $fillable = [
         'title' , 'image' , 'content' , 'category_id' , 'school_id' , 'modified_by' , 'featured'];
 
@@ -17,7 +22,7 @@ class Post extends Model
 
     public function schools()
     {
-        return $this->hasMany('App\SchoolPost');
+        return $this->belongsToMany('App\School', 'schools_posts', 'posts_id', 'schools_id');
     }
 
     public function lastUpdate(){

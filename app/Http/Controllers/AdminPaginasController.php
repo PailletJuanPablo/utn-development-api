@@ -5,7 +5,7 @@
 	use DB;
 	use CRUDBooster;
 
-	class AdminPublicacionesController extends \crocodicstudio\crudbooster\controllers\CBController {
+	class AdminPaginasController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
@@ -19,35 +19,26 @@
 			$this->button_action_style = "button_icon";
 			$this->button_add = true;
 			$this->button_edit = true;
-			$this->button_delete = true;
+			$this->button_delete = false;
 			$this->button_detail = true;
 			$this->button_show = true;
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = false;
-			$this->table = "posts";
+			$this->table = "pages";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
 			$this->col[] = ["label"=>"Titulo","name"=>"title"];
 			$this->col[] = ["label"=>"Imagen Principal","name"=>"image","image"=>true];
-			$this->col[] = ["label"=>"Contenido","name"=>"content"];
-			$this->col[] = ["label"=>"Categoría","name"=>"category_id","join"=>"categories,id"];
-			$this->col[] = ["label"=>"Escuela","name"=>"school_id","join"=>"schools,id"];
-			$this->col[] = ["label"=>"Destacada","name"=>"featured"];
-			$this->form[] = ['label'=>'Actors','type'=>'select2','datatable'=>'actors,name','relationship_table'=>'films_actors'];
-
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Titulo','name'=>'title','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'Puedes introducir solo una letra'];
+			$this->form[] = ['label'=>'Título','name'=>'title','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'Puedes introducir solo una letra'];
 			$this->form[] = ['label'=>'Imagen','name'=>'image','type'=>'upload','validation'=>'required|image|max:3000','width'=>'col-sm-10','help'=>'Tipo de imágenes soportados: JPG, JPEG, PNG, GIF, BMP'];
-			$this->form[] = ['label'=>'Contenido','name'=>'content','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Categoría','name'=>'category_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'categories, name'];
-			$this->form[] = ['label'=>'Escuela','name'=>'school_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'schools, name'];
-			$this->form[] = ['label'=>'Destacada','name'=>'featured','type'=>'checkbox','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Contenido','name'=>'content','type'=>'wysiwyg','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
@@ -55,10 +46,8 @@
 			//$this->form[] = ["label"=>"Title","name"=>"title","type"=>"text","required"=>TRUE,"validation"=>"required|string|min:3|max:70","placeholder"=>"Puedes introducir solo una letra"];
 			//$this->form[] = ["label"=>"Image","name"=>"image","type"=>"upload","required"=>TRUE,"validation"=>"required|image|max:3000","help"=>"Tipo de imágenes soportados: JPG, JPEG, PNG, GIF, BMP"];
 			//$this->form[] = ["label"=>"Content","name"=>"content","type"=>"textarea","required"=>TRUE,"validation"=>"required|string|min:5|max:5000"];
-			//$this->form[] = ["label"=>"Category Id","name"=>"category_id","type"=>"select2","required"=>TRUE,"validation"=>"required|integer|min:0","datatable"=>"category,id"];
-			//$this->form[] = ["label"=>"School Id","name"=>"school_id","type"=>"select2","required"=>TRUE,"validation"=>"required|integer|min:0","datatable"=>"school,id"];
+			//$this->form[] = ["label"=>"Parent Page","name"=>"parent_page","type"=>"number","required"=>TRUE,"validation"=>"required|integer|min:0"];
 			//$this->form[] = ["label"=>"Modified By","name"=>"modified_by","type"=>"number","required"=>TRUE,"validation"=>"required|integer|min:0"];
-			//$this->form[] = ["label"=>"Featured","name"=>"featured","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
 			# OLD END FORM
 
 			/* 

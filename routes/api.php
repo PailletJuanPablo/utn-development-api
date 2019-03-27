@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::get('pages', 'ApiPagesAndPostsController@getPages')->name('api.pages');
+
 Route::get('posts', 'ApiPagesAndPostsController@getPosts')->name('api.posts');
 Route::post('auth/login', 'ApiLoginController@login')->name('api.login');
 Route::get('page/{id}', 'ApiPagesAndPostsController@getPageById')->name('api.page');
@@ -26,3 +28,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
+Route::get('pages', 'ApiPagesAndPostsController@getPages')->name('api.pages');

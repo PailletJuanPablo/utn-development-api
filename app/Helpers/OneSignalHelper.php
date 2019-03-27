@@ -67,7 +67,7 @@ class OneSignalHelper
                 );
             }
 
-            $notification = OneSignal::sendNotificationUsingTags(
+      /*      $notification = OneSignal::sendNotificationUsingTags(
                 $db_notification->title,
                 $tags,
                 $url = null,
@@ -80,7 +80,7 @@ class OneSignalHelper
                 $schedule = null,
                 $headings = "¡Nueva publicación!"
             );
-            return $notification;
+            return $notification;*/
         }  catch(Exception $e){
             return $e;
         }

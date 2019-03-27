@@ -5,12 +5,12 @@
 	use DB;
 	use CRUDBooster;
 
-	class AdminPublicacionesController extends \crocodicstudio\crudbooster\controllers\CBController {
+	class AdminCategoriasController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
-			$this->title_field = "title";
+			$this->title_field = "name";
 			$this->limit = "20";
 			$this->orderby = "id,desc";
 			$this->global_privilege = false;
@@ -25,40 +25,23 @@
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = false;
-			$this->table = "posts";
+			$this->table = "categories";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"Titulo","name"=>"title"];
-			$this->col[] = ["label"=>"Imagen Principal","name"=>"image","image"=>true];
-			$this->col[] = ["label"=>"Contenido","name"=>"content"];
-			$this->col[] = ["label"=>"Categoría","name"=>"category_id","join"=>"categories,id"];
-			$this->col[] = ["label"=>"Escuela","name"=>"school_id","join"=>"schools,id"];
-			$this->col[] = ["label"=>"Destacada","name"=>"featured"];
-			$this->form[] = ['label'=>'Actors','type'=>'select2','datatable'=>'actors,name','relationship_table'=>'films_actors'];
-
+			$this->col[] = ["label"=>"Nombre","name"=>"name"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Titulo','name'=>'title','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'Puedes introducir solo una letra'];
-			$this->form[] = ['label'=>'Imagen','name'=>'image','type'=>'upload','validation'=>'required|image|max:3000','width'=>'col-sm-10','help'=>'Tipo de imágenes soportados: JPG, JPEG, PNG, GIF, BMP'];
-			$this->form[] = ['label'=>'Contenido','name'=>'content','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Categoría','name'=>'category_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'categories, name'];
-			$this->form[] = ['label'=>'Escuela','name'=>'school_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'schools, name'];
-			$this->form[] = ['label'=>'Destacada','name'=>'featured','type'=>'checkbox','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Nombre','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'Puedes introducir solo una letra'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ["label"=>"Title","name"=>"title","type"=>"text","required"=>TRUE,"validation"=>"required|string|min:3|max:70","placeholder"=>"Puedes introducir solo una letra"];
-			//$this->form[] = ["label"=>"Image","name"=>"image","type"=>"upload","required"=>TRUE,"validation"=>"required|image|max:3000","help"=>"Tipo de imágenes soportados: JPG, JPEG, PNG, GIF, BMP"];
-			//$this->form[] = ["label"=>"Content","name"=>"content","type"=>"textarea","required"=>TRUE,"validation"=>"required|string|min:5|max:5000"];
-			//$this->form[] = ["label"=>"Category Id","name"=>"category_id","type"=>"select2","required"=>TRUE,"validation"=>"required|integer|min:0","datatable"=>"category,id"];
-			//$this->form[] = ["label"=>"School Id","name"=>"school_id","type"=>"select2","required"=>TRUE,"validation"=>"required|integer|min:0","datatable"=>"school,id"];
-			//$this->form[] = ["label"=>"Modified By","name"=>"modified_by","type"=>"number","required"=>TRUE,"validation"=>"required|integer|min:0"];
-			//$this->form[] = ["label"=>"Featured","name"=>"featured","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Name","name"=>"name","type"=>"text","required"=>TRUE,"validation"=>"required|string|min:3|max:70","placeholder"=>"Puedes introducir solo una letra"];
+			//$this->form[] = ["label"=>"Parent Category","name"=>"parent_category","type"=>"number","required"=>TRUE,"validation"=>"required|integer|min:0"];
 			# OLD END FORM
 
 			/* 
