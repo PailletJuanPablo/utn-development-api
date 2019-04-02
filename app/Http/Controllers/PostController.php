@@ -77,7 +77,7 @@ class PostController extends Controller
                     "category_id" => $post->category_id
                 ];
                 $notificator = new OneSignalHelper;
-                 $notificator->sendCustom($notificationToCreate);
+           //      $notificator->sendCustom($notificationToCreate);
             }
         }else{
             $notificationToCreate = [
@@ -87,7 +87,7 @@ class PostController extends Controller
             ];
             $notificator = new OneSignalHelper;
 
-             $notificator->sendCustom($notificationToCreate);
+         //    $notificator->sendCustom($notificationToCreate);
         }
         return redirect()->route('posts.index');
     }

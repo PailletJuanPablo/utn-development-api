@@ -24,6 +24,7 @@ Route::get('ingresantes', 'ApiPagesAndPostsController@getIngresantesZone')->name
 Route::get('featured', 'ApiPagesAndPostsController@getFeatured')->name('api.featured');
 Route::post('auth/me', 'ApiLoginController@login')->name('api.login');
 Route::get('schools', 'ApiPagesAndPostsController@getSchools')->name('api.schools');
+Route::post('set_subscriptions', 'NotificationsController@setSubscriptions')->name('api.set_subscriptions');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

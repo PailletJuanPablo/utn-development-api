@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Page;
 use App\School;
+use App\Category;
 class ApiPagesAndPostsController extends Controller
 {
     public function getPosts(){
@@ -17,7 +18,7 @@ class ApiPagesAndPostsController extends Controller
         $post = Post::with('category', 'schools')->find($id);
         return response()->json($post);
     }
-    
+
 
     public function getPageById($id){
         $page = Page::find($id);
@@ -41,8 +42,10 @@ class ApiPagesAndPostsController extends Controller
 
     public function getSchools(){
         $schools = School::all();
-        return response()->json($schools);
+        $categories = Category::all();
+        return response()->json(['schools' => $schools, 'categories' => $categories]);
     }
+
 
 
 }

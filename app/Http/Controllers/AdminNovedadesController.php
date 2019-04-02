@@ -3,6 +3,7 @@
 use App\Post;
 use CRUDBooster;
 use App\Helpers\OneSignalHelper;
+use App\Notification;
 
 class AdminNovedadesController extends \crocodicstudio\crudbooster\controllers\CBController
 {
@@ -270,11 +271,17 @@ class AdminNovedadesController extends \crocodicstudio\crudbooster\controllers\C
                     "school_id" => $school->id,
                     "category_id" => $post->category_id,
                 ];
-
-                $notificator = new OneSignalHelper;
-                $notificator->sendCustom($notificationToCreate);
+                $db_notification = new Notification();
+                $db_notification->fill($notificationToCreate);
+                $db_notification->save();
             }
         }
+
+        $notificator = new OneSignalHelper;
+        $notificator->sendCustom($post);
+
+
+
     }
 
     /*

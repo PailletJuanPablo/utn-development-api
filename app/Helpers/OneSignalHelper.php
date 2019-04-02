@@ -7,6 +7,8 @@ use OneSignal;
 use Illuminate\Support\Carbon;
 use App\Notification;
 use App\User;
+use Illuminate\Support\Facades\Log;
+
 class OneSignalHelper
 {
 
@@ -15,9 +17,7 @@ class OneSignalHelper
      * PushHelper constructor.
      */
     public function __construct()
-    {
-
-    }
+    { }
 
     /**
      * @param $data
@@ -26,7 +26,7 @@ class OneSignalHelper
      */
     public function sendGeneral($notificationToCreate)
     {
-        try{
+        try {
             $notification = new Notification();
             $notification->fill($notificationToCreate);
             $notification->save();
@@ -35,59 +35,63 @@ class OneSignalHelper
                 $notification->description,
                 $url = null,
                 $data =
-                [
-                    "notificationId" => $notification->id
-                ],
+                    [
+                        "notificationId" => $notification->id
+                    ],
                 $buttons = null,
                 $schedule = $now->toDateTimeString(),
                 $headings = $notification->title
             );
             return $notification;
-        }
-        catch(Exception $e){
+        } catch (Exception $e) {
             return $e;
         }
-
     }
 
-    public function sendCustom($notificationToCreate)
+    public function sendCustom($post)
     {
+        $filters = [];
+        foreach ($post->schools as $school) {
+            if($school){
+                $field_filter = ["field" => "tag", "key" => "school_id_" . $school->id, "relation" => "=", "value" => "test"];
+                $or_filter =     ['operator' => 'OR'];
 
-        try{
-            $db_notification = new Notification();
-            $db_notification->fill($notificationToCreate);
-            $db_notification->save();
-            $tags = array(
-                ["field" => "tag", "key" => "general", "relation" => "=", "value" => "true"],
-            );
-           if($db_notification->school_id){
-                array(
-                    ["field" => "tag", "key" => "general", "relation" => "=", "value" => "true"],
-                    ["field" => "tag", "key" => "school_id_" . $db_notification->school_id, "relation" => "=", "value" => "true"],
-                );
+                array_push($filters, $field_filter);
+                array_push($filters, $or_filter);
             }
+        }
 
-        /*  $notification = OneSignal::sendNotificationUsingTags(
-                $db_notification->title,
-                $tags,
+
+        if($post->category){
+            $field_filter = ["field" => "tag", "key" => "category_id" . $post->category->id, "relation" => "=", "value" => "test"];
+            $or_filter = ['operator' => 'OR'];
+            array_push($filters, $field_filter);
+            array_push($filters, $or_filter);
+        }
+
+        Log::info('sending notif', $filters);
+        try {
+            $notification = OneSignal::sendNotificationUsingTags(
+                $post->title,
+                $filters,
                 $url = null,
                 $data =
-                [
-                    "type" => "post",
-                    "notificationId" => $db_notification->id
-                ],
+                    [
+                        "type" => "post",
+                        "postId" => $post->id
+                    ],
                 $buttons = null,
                 $schedule = null,
                 $headings = "¡Nueva publicación!"
             );
-            return $notification;*/
-        }  catch(Exception $e){
-            return $e;
+            // This means an error
+            if($notification){
+                Log::info('after sending notif', $notification);
+            }
+
+            return $notification;
+        } catch (Exception $e) {
+            throw $e;
         }
     }
-
-
-
-
-
 }
