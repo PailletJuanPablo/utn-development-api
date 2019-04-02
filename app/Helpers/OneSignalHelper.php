@@ -69,6 +69,12 @@ class OneSignalHelper
             array_push($filters, $or_filter);
         }
 
+        $external_field_filter = ["field" => "tag", "key" => "general", "relation" => "=", "value" => "true"];
+        $external_or_filter = ['operator' => 'OR'];
+        array_push($filters, $external_field_filter);
+        array_push($filters, $external_or_filter);
+
+
         Log::info('sending notif', $filters);
         try {
             $notification = OneSignal::sendNotificationUsingTags(
