@@ -29,14 +29,15 @@ class AdminNovedadesController extends \crocodicstudio\crudbooster\controllers\C
         $this->table = "posts";
         # END CONFIGURATION DO NOT REMOVE THIS LINE
 
-        # START COLUMNS DO NOT REMOVE THIS LINE
-        $this->col = [];
-        $this->col[] = ["label" => "Titulo", "name" => "title"];
-        $this->col[] = ["label" => "Imagen Principal", "name" => "image", "image" => true];
-        $this->col[] = ["label" => "Categoria", "name" => "category_id", "join" => "categories,name"];
-        # END COLUMNS DO NOT REMOVE THIS LINE
+			# START COLUMNS DO NOT REMOVE THIS LINE
+			$this->col = [];
+			$this->col[] = ["label"=>"Titulo","name"=>"title"];
+			$this->col[] = ["label"=>"Imagen Principal","name"=>"image","image"=>true];
+			$this->col[] = ["label"=>"Categoria","name"=>"category_id","join"=>"categories,name"];
+			$this->col[] = ["label"=>"Eliminada","name"=>"deleted_at"];
+			# END COLUMNS DO NOT REMOVE THIS LINE
 
-        # START FORM DO NOT REMOVE THIS LINE
+			# START FORM DO NOT REMOVE THIS LINE
         $this->form = [];
         $this->form[] = ['label' => 'Titulo', 'name' => 'title', 'type' => 'text', 'validation' => 'required|string|min:3|max:70', 'width' => 'col-sm-10', 'placeholder' => 'Puedes introducir solo una letra'];
         $this->form[] = ['label' => 'Imagen', 'name' => 'image', 'type' => 'upload', 'validation' => 'required|image|max:3000', 'width' => 'col-sm-10', 'help' => 'Tipo de imágenes soportados: JPG, JPEG, PNG, GIF, BMP'];
