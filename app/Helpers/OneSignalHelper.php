@@ -53,7 +53,7 @@ class OneSignalHelper
         $filters = [];
         foreach ($post->schools as $school) {
             if($school){
-                $field_filter = ["field" => "tag", "key" => "school_id_" . $school->id, "relation" => "=", "value" => "test"];
+                $field_filter = ["field" => "tag", "key" => "school_id_" . $school->id, "relation" => "=", "value" => "true"];
                 $or_filter =     ['operator' => 'OR'];
 
                 array_push($filters, $field_filter);
@@ -63,7 +63,7 @@ class OneSignalHelper
 
 
         if($post->category){
-            $field_filter = ["field" => "tag", "key" => "category_id" . $post->category->id, "relation" => "=", "value" => "test"];
+            $field_filter = ["field" => "tag", "key" => "category_id" . $post->category->id, "relation" => "=", "value" => "true"];
             $or_filter = ['operator' => 'OR'];
             array_push($filters, $field_filter);
             array_push($filters, $or_filter);
